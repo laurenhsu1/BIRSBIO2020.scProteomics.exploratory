@@ -21,7 +21,7 @@ RoxygenNote: 7.1.0
 Depends: 
     adespatial,
     caret,
-    ComplexHeatmap
+    ComplexHeatmap,
     corral,
     dplyr,
     ggplot2,
