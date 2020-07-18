@@ -1,2 +1,8 @@
 inst/doc
 *~
+.Rproj.user
+.RData
+.Rproj
+Z_HOWTO_BUILD_WORKSHOP.Rmd
+Z_workshop_example.Rmd
+.gitignore

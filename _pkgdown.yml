@@ -1,4 +1,4 @@
-url: https://seandavi.github.io/sars2pack
+url: https://laurenhsu1.github.io/BIRSBIO2020.scProteomics.exploratory
 
 template:
   params:
@@ -6,13 +6,13 @@ template:
     ganalytics: UA-93043521-1
 
 home:
-  title: "BuildABiocWorkshop2020"
+  title: "Exploratory analyses of sc spatial proteomics data for BIRS Biointegration 2020"
   type: inverse
 
 
 navbar:
   right:
    - icon: fa-github
-     href: https://github.com/seandavi/BuildABiocWorkshop2020
+     href: https://laurenhsu1.github.io/BIRSBIO2020.scProteomics.exploratory
      
 

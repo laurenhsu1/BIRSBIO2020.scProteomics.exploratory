@@ -1,28 +1,49 @@
-Package: BuildABiocWorkshop2020
-Title: Bioconductor Workshop Template and Github Actions
+Package: BIRSBIO2020.scProteomics.exploratory
+Title: Exploratory analyses of sc proteomics data
 Version: 0.1.1
 Authors@R: 
-    person(given = "Sean",
-           family = "Davis",
-           role = c("aut", "cre"),
-           email = "seandavi@gmail.com",
-           comment = c(ORCID = "your-orc-id-here"))
-Description: This package serves as a template for using github actions to 
-    prepare a Bioconductor Workshop package for use. In particular,
-    a pkgdown website and docker image are generated based on workflow 
-    settings. 
+    c(person(given = "Lauren", family = "Hsu",
+             role = c("aut", "cre"),
+             email = "lrnshoe@gmail.com",
+             comment = c(ORCID = "0000-0002-6035-7381")),
+     person(given = "Aedin", family = "Culhane",
+             role = c("aut"),
+             email = "aedin@jimmy.harvard.edu",
+             comment = c(ORCID = "0000-0002-1395-9734")))
+Description: Exploratory analyses of sc proteomics data, 
+    including 2 vignettes: 1) cross-dataset label transfer;
+    and 2) relating spatial and clinical features.
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.0
 Depends: 
-    Biobase
+    adespatial,
+    caret,
+    ComplexHeatmap
+    corral,
+    dplyr,
+    ggplot2,
+    ggpubr,
+    maptools,
+    pals,
+    randomForest,
+    raster,
+    readr,
+    reshape,
+    reshape2,
+    scater,
+    sf,
+    SingleCellExperiment,
+    spdep,
+    stars,
+    stringr
 Suggests: 
     knitr,
     rmarkdown,
     pkgdown
-URL: https://seandavi.github.io/BuildABiocWorkshop2020/
-BugReports: https://github.com/seandavi/BuildABiocWorkshop2020/issues/new/choose
+URL: https://laurenhsu1.github.io/BIRSBIO2020.scProteomics.exploratory/
+BugReports: https://github.com/laurenhsu1/BIRSBIO2020.scProteomics.exploratory/issues/new/choose
 VignetteBuilder: knitr
-DockerImage: seandavi/buildabiocworkshop2020:latest
+DockerImage: laurenhsu/birsbio2020_scproteomics_exploratory:latest

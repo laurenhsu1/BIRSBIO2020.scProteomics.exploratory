@@ -48,7 +48,7 @@ jobs:
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
-          repository: seandavi/buildabiocworkshop2020
+          repository: laurenhsu/birsbio2020_scproteomics_exploratory
           tag_with_ref: true
           tag_with_sha: true
           tags: latest
