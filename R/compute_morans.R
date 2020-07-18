@@ -25,49 +25,54 @@ SAVEPATH <- "../data/spatial_proc"
 
 data_dir <- file.path(DATAPATH, "TNBC_shareCellData")
 
-fns <- list.files(data_dir, str_interp(".tiff"))
-moran_list <- list()
-
-for(fn in fns){
-  samp_list <- list()
+process_tiffs <- function(dirname){
+  fns <- list.files(data_dir, str_interp(".tiff"))
+  moran_list <- list()
   
-  f <- paste(data_dir, fn, sep = '/')
-  
-  samp_id <- str_split_fixed(fn,'_',2)[1] # with p
-  sample_id <- as.numeric(str_split_fixed(str_split_fixed(fn,'_',2)[1],'p',2)[2]) # without p as numeric
-  samp_list[['samp']] <- samp_id
-  
-  polys <- read_stars(f) %>%
-    st_as_sf(merge = TRUE) %>%
-    st_cast("POLYGON")
-  colnames(polys)[1] <- colnames(cell_data)[2]
-  
-  cell_data <- read_csv(file.path(data_dir, "cellData.csv")) %>%
-    filter(SampleID == sample_id)
-  
-  polys <- polys %>%
-    inner_join(cell_data) %>%
-    group_by(cellLabelInImage) %>% # some regions get split into two adjacent polys --> merge
-    summarise_all(first)
-  
-  samp_list[['polys']] <- polys
-  
-  nb.maf <- poly2nb(polys)
-  xy <- polys %>% st_cast("POINT") %>% st_coordinates()
-  nbgab <- graph2nb(gabrielneigh(xy), sym = TRUE)
-  
-  samp_list[['nb.maf']] <- nb.maf
-  samp_list[['xy']] <- xy
-  samp_list[['nbgab']] <- nbgab
-  
-  nblgab <- nb2listw(nbgab)
-  distgab <- nbdists(nbgab, xy)
-  
-  samp_list[['nblgab']] <- nblgab
-  samp_list[['distgab']] <- distgab
-  
-  saveRDS(samp_list, file = paste0(SAVEPATH, samp_id,'.rds'))
+  for(fn in fns){
+    samp_list <- list()
+    
+    f <- paste(data_dir, fn, sep = '/')
+    
+    samp_id <- str_split_fixed(fn,'_',2)[1] # with p
+    sample_id <- as.numeric(str_split_fixed(str_split_fixed(fn,'_',2)[1],'p',2)[2]) # without p as numeric
+    samp_list[['samp']] <- samp_id
+    
+    polys <- read_stars(f) %>%
+      st_as_sf(merge = TRUE) %>%
+      st_cast("POLYGON")
+    colnames(polys)[1] <- colnames(cell_data)[2]
+    
+    cell_data <- read_csv(file.path(data_dir, "cellData.csv")) %>%
+      filter(SampleID == sample_id)
+    
+    polys <- polys %>%
+      inner_join(cell_data) %>%
+      group_by(cellLabelInImage) %>% # some regions get split into two adjacent polys --> merge
+      summarise_all(first)
+    
+    samp_list[['polys']] <- polys
+    
+    nb.maf <- poly2nb(polys)
+    xy <- polys %>% st_cast("POINT") %>% st_coordinates()
+    nbgab <- graph2nb(gabrielneigh(xy), sym = TRUE)
+    
+    samp_list[['nb.maf']] <- nb.maf
+    samp_list[['xy']] <- xy
+    samp_list[['nbgab']] <- nbgab
+    
+    nblgab <- nb2listw(nbgab)
+    distgab <- nbdists(nbgab, xy)
+    
+    samp_list[['nblgab']] <- nblgab
+    samp_list[['distgab']] <- distgab
+    
+    saveRDS(samp_list, file = paste0(SAVEPATH,'/', samp_id,'.rds'))
+  }
 }
+
+# to run, uncomment out the line below
+#process_tiffs(dirname = data_dir)
 
 
 ###########################################################
@@ -113,6 +118,7 @@ moranS<-function(sf){
   return(ms)
 }
 
-resMoranTest <- runMoranScript(pFiles)
-write.csv(resMoranTest, file=paste0(SAVEPATH,"resMoranTest.csv"))
+# to run, uncomment out these lines
+# resMoranTest <- runMoranScript(pFiles)
+# write.csv(resMoranTest, file=file.path(SAVEPATH,"resMoranTest.csv"))
 
