@@ -52,8 +52,6 @@ library(scater)
 library(ggthemes)
 library(pals)
 library(ComplexHeatmap)
-source('../R/utils.R')
-
 library(caret)
 library(randomForest)
 ```
