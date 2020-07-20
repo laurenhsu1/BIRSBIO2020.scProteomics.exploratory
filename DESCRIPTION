@@ -18,8 +18,18 @@ Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.0
-Imports: 
+Suggests: 
     adespatial,
+    knitr,
+    maptools,
+    pkgdown,
+    raster,
+    readr,
+    rmarkdown,
+    sf,
+    spdep,
+    stars,
+    stringr,
     caret,
     ComplexHeatmap,
     corral,
@@ -27,23 +37,12 @@ Imports:
     ggplot2,
     ggpubr,
     ggthemes,
-    maptools,
     pals,
     randomForest,
-    raster,
-    readr,
     reshape,
     reshape2,
     scater,
-    sf,
-    SingleCellExperiment,
-    spdep,
-    stars,
-    stringr
-Suggests: 
-    knitr,
-    rmarkdown,
-    pkgdown
+    SingleCellExperiment
 URL: https://laurenhsu1.github.io/BIRSBIO2020.scProteomics.exploratory/
 BugReports: https://github.com/laurenhsu1/BIRSBIO2020.scProteomics.exploratory/issues/new/choose
 VignetteBuilder: knitr

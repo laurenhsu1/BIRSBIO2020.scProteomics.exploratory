@@ -1,3 +1,20 @@
+---
+title: "Compute Moran's Index"
+author: Lauren Hsu^[Harvard School of Public Health]
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Compute Moran's Index}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+See the source code of this vignette for the script used to compute the Moran's I values analyzed in [2. Tumor spatial autocorrelation and clinical prognosis](https://laurenhsu1.github.io/BIRSBIO2020.scProteomics.exploratory/articles/moran_clinical.html).
+
+```{r packages, eval = F, include = F}
 library(sf)
 library(stars)
 library(raster)
@@ -7,19 +24,18 @@ library(spdep)
 library(stringr)
 library(readr)
 library(dplyr)
+```
 
-# Some parts of this image processing steps of this script 
-# are adapted from code by Pratheepa Jeganathan and Kris Sankaran
-# Github: @PratheepaJ @krisrs1128
+## Image loading and spatial processing
 
-# download the mibiTOF data from the Angelo Lab
-# https://www.angelolab.com/mibi-data
-# move the datasets into the DATAPATH directory
+Download the mibiTOF data from the [Angelo Lab website](https://www.angelolab.com/mibi-data). 
+Move the datasets into the `data` directory.
 
-###########################################################
-# Image loading & spatial processing
-###########################################################
+This portion of the script converts each image into a more analysis-friendly format, and computes Gabriel graphs/neighborhoods, which is used as the spatial weighting matrix (SWM) in the Moran's I calculation below.
 
+*Some parts of this image processing steps of this script are adapted from code by Pratheepa Jeganathan and Kris Sankaran. Github: @PratheepaJ @krisrs1128*
+
+```{r, eval = F, include = F}
 DATAPATH <- "../data"
 SAVEPATH <- "../data/spatial_proc"
 
@@ -71,14 +87,17 @@ process_tiffs <- function(dirname){
   }
 }
 
-# to run, uncomment out the line below
-#process_tiffs(dirname = data_dir)
+process_tiffs(dirname = data_dir)
+```
 
 
-###########################################################
-# Computing Moran's I after processing image files
-###########################################################
+## Computing Moran's Index
 
+This portion reads in the processed files generated above and computes Moran's I for each variable, which includes attributes like protein expression values (Moran's I is computed for each), cell type dummy variable, and cell size.
+
+The output of this code is the `resMoranTest.csv` file included in the `data` folder.
+
+```{r, eval = F, include = F}
 rdsfolder <- SAVEPATH
 pFiles <- file.path(rdsfolder, dir(rdsfolder))
 
@@ -118,7 +137,8 @@ moranS<-function(sf){
   return(ms)
 }
 
-# to run, uncomment out these lines
-# resMoranTest <- runMoranScript(pFiles)
-# write.csv(resMoranTest, file=file.path(SAVEPATH,"resMoranTest.csv"))
+resMoranTest <- runMoranScript(pFiles)
+write.csv(resMoranTest, file=file.path(SAVEPATH,"resMoranTest.csv"))
 
+
+```

@@ -15,17 +15,6 @@ find_ct_expr <- function(x, labs){
   return(ct_expr)
 }
 
-# 1a, 1b
-find_ct_emb <- function(x, labs){
-  # when elements are in rows and sums should be colwise
-  ct_expr <- data.frame(matrix(nrow = length(unique(labs)), ncol = ncol(x)))
-  rownames(ct_expr) <- unique(labs)
-  for(ct in unique(labs)){
-    ct_expr[ct,] <- colSums(x[which(labs == ct),])/sum(labs == ct)
-  }
-  return(ct_expr)
-}
-
 # 1b1
 norm01 <- function(x){
   x[which(is.na(x))] <- 0
