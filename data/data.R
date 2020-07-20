@@ -13,7 +13,7 @@
 #'   \item{tumor_class}{class of tumor; 0=mixed, 1=compartmentalized, 2=cold}
 #' }
 #' @source \url{https://www.angelolab.com/mibi-data}
-"patient_class.csv"
+"patient_class"
 
 
 #' Moran's Index in TNBC, based on Gabriel neighborhoods
@@ -33,4 +33,4 @@
 #'   ...
 #' }
 #' @source \url{https://www.angelolab.com/mibi-data}
-"resMoranTest.csv"
+"resMoranTest"
