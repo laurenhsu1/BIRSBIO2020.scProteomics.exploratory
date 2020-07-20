@@ -55,7 +55,7 @@ We used SWM defined by Gabriel neighborhoods, which is a special case of a Delau
 ![](imgs/morans/tumor_classes.png){ width=95% }
 
 ```{r}
-tumor_class <- read.csv(file.path(datpath,'patient_class.csv'),header = FALSE)
+tumor_class <- read.csv(file.path(datpath,'patient_class.csv'),header = TRUE)
 names(tumor_class) <- c('sample','class')
 tumor_class$sample <- paste0('p',tumor_class$sample)
 tumor_class$class <- plyr::mapvalues(tumor_class$class, 
