@@ -43,7 +43,7 @@ We then use the second model to predict labels for the mibi dataset (dotted arro
 
 # Set-up
 
-```{r package_load, message = F}
+```{r package_load, message = F, eval = F}
 library(corral)
 library(SingleCellExperiment)
 library(ggplot2)
@@ -51,7 +51,6 @@ library(reshape2)
 library(scater)
 library(ggthemes)
 library(pals)
-library(ComplexHeatmap)
 library(caret)
 library(randomForest)
 ```
@@ -399,6 +398,8 @@ ggplot(melt(data.frame(class = rownames(imm_rf_cm$byClass),imm_rf_cm$byClass[,to
 
 ```{r, eval = F}
 # TUMOR
+
+library(ComplexHeatmap)
 
 livecells_rf_pred <- predict(tum_rf_mod, t(assay(livecells.sce)[tum_int_genes,]))
 table(livecells_rf_pred)

@@ -17,6 +17,8 @@ library(ggplot2)
 library(reshape)
 library(SingleCellExperiment)
 library(ggpubr)
+library(dplyr)
+library(plyr)
 ```
 # Introduction
 
@@ -37,7 +39,10 @@ Visit the [BIRSBiointegration Hackathon page](https://github.com/BIRSBiointegrat
 
 ```{r}
 datpath <- '../data'
+load(file.path(datpath, 'moranRes.rda'))
+```
 
+```{r, eval = F}
 moran <- read.csv(file.path(datpath,'resMoranTest.csv'))
 colnames(moran)[1] <- "sample"
 ```
@@ -54,7 +59,7 @@ We used SWM defined by Gabriel neighborhoods, which is a special case of a Delau
 
 ![](imgs/morans/tumor_classes.png){ width=95% }
 
-```{r}
+```{r, eval = F}
 tumor_class <- read.csv(file.path(datpath,'patient_class.csv'),header = TRUE)
 names(tumor_class) <- c('sample','class')
 tumor_class$sample <- paste0('p',tumor_class$sample)
