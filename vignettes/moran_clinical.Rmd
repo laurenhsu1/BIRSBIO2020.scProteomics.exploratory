@@ -42,11 +42,6 @@ datpath <- '../data'
 load(file.path(datpath, 'moranRes.rda'))
 ```
 
-```{r, eval = F}
-moran <- read.csv(file.path(datpath,'resMoranTest.csv'))
-colnames(moran)[1] <- "sample"
-```
-
 A key component used in computing Moran's I is the spatial weighting matrix (SWM). This can be formed from any number of ways, including by various distance metrics (e.g., Euclidean), by graphs, or any other ways of defining proximity in space. 
 
 ![](imgs/morans/swm.png){ width=95% }
@@ -58,17 +53,6 @@ We used SWM defined by Gabriel neighborhoods, which is a special case of a Delau
 *patient_class.csv* is included in the download from the link above. For each sample it contains the tumor  classification as defined in the paper:
 
 ![](imgs/morans/tumor_classes.png){ width=95% }
-
-```{r, eval = F}
-tumor_class <- read.csv(file.path(datpath,'patient_class.csv'),header = TRUE)
-names(tumor_class) <- c('sample','class')
-tumor_class$sample <- paste0('p',tumor_class$sample)
-tumor_class$class <- plyr::mapvalues(tumor_class$class, 
-                               from = c(0, 1, 2), 
-                               to = c('mixed','compartment','cold'))
-
-moran <- dplyr::inner_join(moran, tumor_class, by = c('sample'))
-```
 
 # Moran plots
 
