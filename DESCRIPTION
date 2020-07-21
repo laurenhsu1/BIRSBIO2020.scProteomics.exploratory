@@ -21,6 +21,7 @@ RoxygenNote: 7.1.1
 Suggests:
     knitr,
     rmarkdown,
+    pkgbuild,
     pkgdown,
     ggplot2,
     reshape,
